@@ -19,6 +19,12 @@ const Cards = ({ imageLink, pid, name, price, category, currency }) => {
   const [state, setState] = useState(false);
 
   const toggleRaised = () => setState({ raised: !state.raised });
+
+
+  const truncate =(str) => {
+    return str?.length > 18 ? str.substring(0, 18) + "..." : str;
+}
+
   return (
     <Box className={classes.head}>
       <Card
@@ -31,7 +37,8 @@ const Cards = ({ imageLink, pid, name, price, category, currency }) => {
         {/* <CardMedia className={classes.media} image="/lap.png" /> */}
         <CardContent>
           {/* <Typography variant="h6">{name}</Typography> */}
-          <Typography variant="p"> {name} </Typography>
+          <Typography variant="p"> {truncate(name)} </Typography>
+          
           <br/>
           <Typography variant="p" style={{color: "grey"}}> {category} </Typography>
           <br/>
@@ -45,7 +52,7 @@ const Cards = ({ imageLink, pid, name, price, category, currency }) => {
           />
 
           <Typography variant="p" component="p">
-           {currency}{price}
+           {currency} {price}
           </Typography>
         </CardContent>
       </Card>

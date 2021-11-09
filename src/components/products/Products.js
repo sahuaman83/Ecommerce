@@ -22,12 +22,13 @@ const axios = require('axios').default;
 
 const Products = ({ tabs, productList, activeTab, value }) => {
   const classes = UseStyles();
-  const trending = products2?.data || [];
+  // const trending = products2?.data || [];
 
   const [forYou, setForYou] = useState([]);
   const [featBrand, setFeatBrand] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [featCateg, setFeatCateg] = useState([]);
+  const [trending, setTrending] = useState([]);
 
   useEffect(() => {
     getFeeds();
@@ -35,13 +36,15 @@ const Products = ({ tabs, productList, activeTab, value }) => {
 
   const getFeeds = async() => {
     try {
-      const res = await axios.get('http://34.219.97.5:8000/feedListing');
+      const feedres = await axios.get('http://34.219.97.5:8000/feedListing');
+      const trendres = await axios.get('http://34.219.97.5:8000/v1/trending/');
       // console.log(res.data[0].children);
 
-      setForYou(res?.data[0]?.children);
-      setFeatBrand(res?.data[1]?.children);
-      setFeatured(res?.data[2]?.children);
-      setFeatCateg(res?.data[3]?.children);
+      setForYou(feedres?.data[0]?.children);
+      setFeatBrand(feedres?.data[1]?.children);
+      setFeatured(feedres?.data[2]?.children);
+      setFeatCateg(feedres?.data[3]?.children);
+      setTrending(trendres?.data?.data);
 
       
 
@@ -59,19 +62,17 @@ const Products = ({ tabs, productList, activeTab, value }) => {
             </Typography>
             <Grid container>
               {trending &&
-                trending.map((data) => (
+                trending.map((trending) => (
                   <Grid item lg={2} md={4} sx={6}>
-                    <GradiantCards
-                      key={data?.id}
-                      pid={data?.id}
-                      category={data?.category}
-                      imageLink={
-                        "https://picsum.photos/200/300"
-                      }
-                      name={data?.title}
-                      price={data?.price}
-                      review={"product.attributes.review"}
-                    />
+                  <Cards    
+                        key={trending?.product_id}
+                        pid={trending?.product_id}
+                        imageLink={trending?.image}
+                        name={trending?.title}
+                        price={trending?.price}
+                        currency={trending?.currency}
+                        review={'product.attributes.review'}
+                      />
                   </Grid>
                 ))}
             </Grid>
