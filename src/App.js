@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import Layout from "./layouts/Layout";
 import Products from "./components/products/Products";
-// import { productApi } from "api/products";
-import { products } from "./data/mockdata";
 import Categories from "./Categories/Categories";
 import Trending from "./Trending/Trending";
 
@@ -35,12 +33,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-
-  
-          setProductList({ ...productList, [activeTab]:products.data });
-          console.log(activeTab);
-          
-       
+    setProductList({ ...productList, activeTab });
+    console.log(activeTab);
   }, [activeTab]);
 
   const handleChange = (event, newValue) => {
@@ -52,11 +46,10 @@ function App() {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
 
   return (
-
     <Layout
       title="Home"
       setActiveTab={setActiveTab}
@@ -64,44 +57,43 @@ function App() {
       handleChange={handleChange}
       value={value}
     >
-    { activeTab == "6" ?
-      <Products
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        tabs={tabs}
-        productList={productList}
-        value={value}
-      />: <></>
-      }
+      {activeTab == "6" ? (
+        <Products
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          tabs={tabs}
+          productList={productList}
+          value={value}
+        />
+      ) : (
+        <></>
+      )}
 
-      { activeTab == "7" ?
-      <Categories
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        tabs={tabs}
-        productList={productList}
-        value={value}
-      />: <></>
-      }
+      {activeTab == "7" ? (
+        <Categories
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          tabs={tabs}
+          productList={productList}
+          value={value}
+        />
+      ) : (
+        <></>
+      )}
 
-      { activeTab == "8" ?
-      <Trending
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        tabs={tabs}
-        productList={productList}
-        value={value}
-      />: <></>
-      }
-
-      
-
-      
+      {activeTab == "8" ? (
+        <Trending
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          tabs={tabs}
+          productList={productList}
+          value={value}
+        />
+      ) : (
+        <></>
+      )}
     </Layout>
-
   );
 }
-
-
 
 export default App;

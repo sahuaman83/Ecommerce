@@ -3,15 +3,10 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
-  IconButton,
   Typography,
-  Button,
   Box,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-// import Link from "next/link";
-// import { slugName } from "utils/utils";
 import UseStyles from "./UseStyles";
 
 const Cards = ({ imageLink, pid, name, price, category, currency }) => {
@@ -20,10 +15,9 @@ const Cards = ({ imageLink, pid, name, price, category, currency }) => {
 
   const toggleRaised = () => setState({ raised: !state.raised });
 
-
-  const truncate =(str) => {
+  const truncate = (str) => {
     return str?.length > 18 ? str.substring(0, 18) + "..." : str;
-}
+  };
 
   return (
     <Box className={classes.head}>
@@ -34,14 +28,15 @@ const Cards = ({ imageLink, pid, name, price, category, currency }) => {
         raised={state.raised}
       >
         <CardMedia className={classes.media} image={imageLink} />
-        {/* <CardMedia className={classes.media} image="/lap.png" /> */}
         <CardContent>
-          {/* <Typography variant="h6">{name}</Typography> */}
           <Typography variant="p"> {truncate(name)} </Typography>
-          
-          <br/>
-          <Typography variant="p" style={{color: "grey"}}> {category} </Typography>
-          <br/>
+
+          <br />
+          <Typography variant="p" style={{ color: "grey" }}>
+            {" "}
+            {category}{" "}
+          </Typography>
+          <br />
 
           <Rating
             name="half-rating"
@@ -52,7 +47,7 @@ const Cards = ({ imageLink, pid, name, price, category, currency }) => {
           />
 
           <Typography variant="p" component="p">
-           {currency} {price}
+            {currency} {price}
           </Typography>
         </CardContent>
       </Card>
