@@ -7,11 +7,13 @@ const UseStyles = makeStyles((theme) => ({
     width: "220px",
     height: "268px",
     borderRadius: "10px",
+    cursor: "pointer"
   },
   bannercard: {
     width: "100%",  
     height: "100%",
     borderRadius: "10px",
+    cursor: "pointer"
   },
   head: {
     padding: "15px",

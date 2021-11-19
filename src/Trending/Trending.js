@@ -23,7 +23,7 @@ const Trending = ({ tabs, productList, activeTab, value }) => {
       const resp = await axios.get(
         "http://34.219.97.5:8000/v1/trending/brands/"
       );
-      //   console.log(resp.data);
+        console.log(resp.data);
 
       //   setForYou(res?.data[0]?.children);
       setTrending(res?.data?.data);

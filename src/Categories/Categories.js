@@ -11,12 +11,15 @@ import {
 import UseStyles from "../components/products/UseStyles";
 import TabPanel from "../components/tabs/TabPanel";
 import BannerCards from "../components/card/BannerCards";
+import { useHistory } from "react-router-dom";
+// import history from '../history';
 const axios = require("axios").default;
 
 const Categories = ({ tabs, productList, activeTab, value }) => {
   const classes = UseStyles();
 
   const [categ, setCateg] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getFeeds();
@@ -32,6 +35,12 @@ const Categories = ({ tabs, productList, activeTab, value }) => {
       console.error(err);
     }
   };
+
+  const handleCardClick =(categ)=>{
+
+    console.log("click "+ categ.id);
+    history.push('/products');
+  }
   return (
     <div className={classes.blogsContainer}>
       {tabs.map((item, index) => {
@@ -40,8 +49,8 @@ const Categories = ({ tabs, productList, activeTab, value }) => {
             <Grid container>
               {categ &&
                 categ.map((categ) => (
-                  <Grid item lg={2} md={4} sx={6}>
-                    <BannerCards
+                  <Grid item lg={2} md={4} sx={6} onClick={() => handleCardClick(categ)}>
+                    <BannerCards 
                       key={categ?.id}
                       pid={categ?.id}
                       category={categ?.category}
